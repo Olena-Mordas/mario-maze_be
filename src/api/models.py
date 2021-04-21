@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class RequestEntity(models.Model):
+    requestTime = models.DateTimeField(auto_now=True)
+    gridSize = models.IntegerField()
+    gridStructure = models.TextField()

@@ -3,10 +3,6 @@ from collections import deque
 
 def mario_save_princess(N, grid):
 
-    #TODO: remove
-    N=3
-    grid = ['--m','-x-','-p-']
-
     # make sure input is valid
     if not is_valid_input(N, grid):
         return {'error_flag': True, 'paths':[]}
