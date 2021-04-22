@@ -27,7 +27,7 @@ def is_valid_input(N, grid):
     for s in grid:
         if len(s) != N:
             return False
-    grid_string = ''.join(grid)
+    grid_string = ''.join(char for sub in grid for char in sub)
     allowed = '-mxp'
     # check there is only allowed chars
     if not all(c in allowed for c in grid_string):

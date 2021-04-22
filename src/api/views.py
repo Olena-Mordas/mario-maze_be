@@ -23,18 +23,23 @@ db = firebase.database()
 @api_view(['GET'])
 def maze_view(request):
     try:
-        N = request.data.get('N')
-        grid = request.data.get('grid')
+        # parse grid data
+        N = int(request.query_params.get('N'))
+        grid_structure = request.query_params.get('grid')
+        str_rows = grid_structure.split(' ')
+        grid=[]
+        for str_r in str_rows:
+            row=[]
+            for c in str_r:
+                row.append(c)
+            grid.append(row)
 
-        # TODO: remove
-        N = 3
-        grid = ['--m', '-x-', '-p-']
     except:
         return HttpResponse('Unknown request data', status=400)
     # save entry to db
     requestData = {'requestTime': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                    'gridSize': N,
-                   'gridStructure': ';'.join(grid)}
+                   'gridStructure': grid_structure}
     db.push(requestData)
 
     # find the path
