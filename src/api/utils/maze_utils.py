@@ -64,24 +64,3 @@ def find_paths(grid_matrix, N, mario, princess):
                 visited.add((x, y))
     return all_paths
 
-
-def test():
-
-    # grid = ['--m','-x-','-p-']
-    # N = 3
-    # grid = ['---m','----','-x--', '-px-']
-    grid = ['---m', '----', '--x-', '--px']
-    N=4
-    res = mario_save_princess(N, grid)
-    print(res)
-
-
-# [['DOWN', 'LEFT', 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'RIGHT'],
-# ['LEFT', 'DOWN', 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'RIGHT'],
-# ['LEFT', 'LEFT', 'DOWN', 'LEFT', 'DOWN', 'DOWN', 'RIGHT'],
-# ['LEFT', 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'DOWN', 'RIGHT']]
-
-# ['DOWN', 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'RIGHT'],
-# ['LEFT', 'DOWN', 'LEFT', 'DOWN', 'DOWN', 'RIGHT'], [
-# 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'DOWN', 'RIGHT']]
-
