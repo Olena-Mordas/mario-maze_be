@@ -2,6 +2,7 @@ asgiref==3.3.4
 coreapi==2.3.3
 coreschema==0.0.4
 Django==3.2
+django-cors-headers==3.7.0
 djangorestframework==3.12.4
 gcloud==0.17.0
 googleapis-common-protos==1.53.0
