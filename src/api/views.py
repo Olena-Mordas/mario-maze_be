@@ -1,10 +1,11 @@
 from django.http import HttpResponse
 from rest_framework.utils import json
 
-from .utils import maze_utils
+
 from rest_framework.decorators import api_view
 import pyrebase
 from datetime import datetime
+from .utils import maze_utils
 
 firebaseConfig = {
     'apiKey': "AIzaSyAgYhkC1RCevNMpfAOOc8av0YZu6UGE144",
@@ -21,27 +22,35 @@ db = firebase.database()
 
 
 @api_view(['GET'])
-def maze_view(request):
+def maze_view(request, N, grid):
+
+    """
+     Returns a list of all shortest paths from
+     Mario to Princess in the square maze of size N,
+     containing one Mario ('m'), one Princess ('p'),
+     empty cells ('-') and obstacles('x').
+
+     """
+
     try:
         # parse grid data
-        N = int(request.query_params.get('N'))
-        grid_structure = request.query_params.get('grid')
-        str_rows = grid_structure.split(' ')
-        grid=[]
+
+        str_rows = grid.split(' ')
+        matrix=[]
         for str_r in str_rows:
             row=[]
             for c in str_r:
                 row.append(c)
-            grid.append(row)
+            matrix.append(row)
 
     except:
         return HttpResponse('Unknown request data', status=400)
     # save entry to db
     requestData = {'requestTime': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                    'gridSize': N,
-                   'gridStructure': grid_structure}
+                   'gridStructure': grid}
     db.push(requestData)
 
     # find the path
-    res = maze_utils.mario_save_princess(N, grid)
-    return HttpResponse(json.dumps(res))
+    res = maze_utils.mario_save_princess(N, matrix)
+    return HttpResponse(json.dumps(res), status=200)
